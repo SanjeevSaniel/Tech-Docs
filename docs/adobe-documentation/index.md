@@ -1,6 +1,4 @@
----
-title: 'Template Document Generation using Adobe Document Generation API'
----
+# Template Document Generation using Adobe Document Generation API
 
 ## Table of Contents
 
