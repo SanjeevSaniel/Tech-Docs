@@ -21,19 +21,18 @@
 
 Use Microsoft Word to create a document template. Add template tags to indicate where dynamic content will be inserted. For example:
 
-```html
-<pre>
-Dear {{customer_name}},
+```markdown
+Dear &#123;&#123;customer_name&#125;&#125;,
 
-Thank you for your purchase of {{product.name}}. Your order number is {{order.number}}. It was purchased on {{order.date}} and will be delivered by {{order.delivery_date}}.
+Thank you for your purchase of &#123;&#123;product.name&#125;&#125;. Your order number is &#123;&#123;order.number&#125;&#125;. It was purchased on &#123;&#123;order.date&#125;&#125; and will be delivered by &#123;&#123;order.delivery_date&#125;&#125;.
 
 Best regards,
-{{company.name}}
-Address: {{company.address.street}}, {{company.address.city}}, {{company.address.zip}}
+&#123;&#123;company.name&#125;&#125;
+Address: &#123;&#123;company.address.street&#125;&#125;, &#123;&#123;company.address.city&#125;&#125;, &#123;&#123;company.address.zip&#125;&#125;
 
-Author: {{author}}
-Price: ₹{{product.price}}
-</pre>
+Author: &#123;&#123;author&#125;&#125;
+Price: ₹&#123;&#123;product.price&#125;&#125;
+
 ```
 
 ![Document Template Example](screenshots/1-document-template-example.png)
