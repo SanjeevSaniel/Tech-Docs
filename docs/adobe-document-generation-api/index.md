@@ -24,11 +24,19 @@ Use Microsoft Word to create a document template. Add template tags to indicate 
 ```plaintext
 Dear {{customer_name}},
 
-Thank you for your purchase of {{product_name}}. Your order number is {{order_number}}.
+Thank you for your purchase of {{product.name}}. Your order number is {{order.number}}. It was purchased on {{order.date}} and will be delivered by {{order.delivery_date}}.
 
 Best regards,
-{{company_name}}
+{{company.name}}
+Address: {{company.address.street}}, {{company.address.city}}, {{company.address.zip}}
+
+Author: {{author}}
+Price: ₹{{product.price}}
 ```
+
+![Document Template Example](screenshots/1-document-template-example.png)
+
+*Figure 1: Example of a document template in Microsoft Word with template tags.*
 
 ### 2. Prepare Your JSON Data
 
@@ -36,10 +44,25 @@ Create a JSON file with the data that will replace the template tags. Ensure the
 
 ```json
 {
-  "customer_name": "John Doe",
-  "product_name": "Smartphone",
-  "order_number": "123456",
-  "company_name": "TechCorp"
+  "customer_name": "Rajesh Kumar",
+  "product": {
+    "name": "Mystery Novel",
+    "price": "399.00"
+  },
+  "order": {
+    "number": "789012",
+    "date": "2024-12-04",
+    "delivery_date": "2024-12-10"
+  },
+  "company": {
+    "name": "BookVista Publishers",
+    "address": {
+      "street": "123 Book Street",
+      "city": "Mumbai",
+      "zip": "400001"
+    }
+  },
+  "author": "Anita Desai"
 }
 ```
 
@@ -51,6 +74,10 @@ To interact with the Adobe Document Generation API, you need to obtain an API ke
 2. **Create a New Project**: Click on "Create New Project" and give your project a name.
 3. **Add an API**: Select "Add API" and choose "Document Generation API" from the list.
 4. **Generate API Key**: Follow the instructions to generate an API key. Note down the `client_id` and `client_secret` as you will need these for authentication.
+
+![Adobe Developer Console Example](screenshots/3-adobe-developer-console.png)
+
+*Figure 3: Steps to obtain an API key from the Adobe Developer Console.*
 
 ### 4. Generate Token
 
@@ -78,6 +105,10 @@ Use Adobe's Identity Management Service (IMS) to generate an access token.
     "expires_in": 86399
   }
   ```
+
+![Obtaining access token Example](screenshots/4-token-generation.png)
+
+*Figure 4: Generating an access token using Postman.*
 
 ### 5. Get Upload Presigned URI
 
@@ -118,6 +149,10 @@ Get a pre-signed URL for uploading your file to Adobe's cloud storage.
   }
   ```
 
+![Requesting presigned URI](screenshots/5-get-upload-presigned-uri.png)
+
+*Figure 5: Requesting a presigned URI for file upload using Postman.*
+
 ### 6. Upload File
 
 Use the pre-signed URL to upload your file to Adobe's cloud storage.
@@ -149,6 +184,11 @@ Content-Type: application/octet-stream
     "status": "success"
   }
   ```
+
+  - **Body:** The binary file content.
+
+![File Upload Example](screenshots/6-file-upload.png)
+*Figure 6: Uploading the file to Adobe's cloud storage using Postman.*
 
 ### 7. Document Generation (DOCX or PDF)
 
@@ -185,6 +225,10 @@ Submit a document generation job to Adobe's API, specifying the desired format (
 - **Headers:**
   - `x-request-id`: `<JOB_ID>`
 
+![Document Generation Request Example](screenshots/7-document-generation.png)
+
+*Figure 7: Sending a document generation request using Postman.*
+
 ### 8. Poll the Document Generation Periodically check the status of your document generation job using Adobe's API until it's completed
 
 **Endpoint:** `https://pdf-services-ue1.adobe.io/operation/documentgeneration/{{jobID}}/status`
@@ -214,6 +258,10 @@ Submit a document generation job to Adobe's API, specifying the desired format (
   }
   ```
 
+![Check File Generation Status Example](screenshots/8-check-generation-status.png)
+
+*Figure 8: Polling the status of document generation using Postman.*
+
 ### 9. Get the Output File
 
 Once the document generation is complete, download the output file from Adobe's cloud storage.
@@ -240,10 +288,14 @@ Host: <DOWNLOAD_URI>
 - **Status:** 200 OK
 - **Body:** The response will contain the output file content in the specified format (DOCX).
 
+![Download Generated Document Example](screenshots/9-download-generated-document.png)
+
+*Figure 9: Downloading the generated document using Postman.*
+
 Notes:
 
 - Ensure to handle authentication errors and retry logic as per your application needs.
-- The key part is the `"format": "docx"` or `"format": "pdf"` line in the request payload. The `output_uri` you receive in Step 5 will point to the generated file in the specified format.
+- The key part is the `"format": "docx"` or `"format": "pdf"` line in the request payload. The `output_uri` you receive in `Step 8` will point to the generated file in the specified format.
 - Refer to Adobe's official documentation for more detailed instructions and error handling.
 
 This completes the detailed steps for integrating with Adobe Document Services API. 😊📄🚀
