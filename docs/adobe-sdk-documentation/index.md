@@ -8,7 +8,7 @@
 - [4. Create Document](#4-create-document)
 - [5. Save Document](#5-save-document)
 - [6. Setting Up Environment Variables](#6-setting-up-environment-variables)
-- [7. Setting Up a Node.js Environment](#7-setting-up-a-node-js-environment)
+- [7. Setting Up a Node.js Environment](#7-setting-up-a-nodejs-environment)
 - [8. Running the Samples](#8-running-the-samples)
 - [9. Verifying Download Authenticity](#9-verifying-download-authenticity)
 - [10. Logging](#10-logging)
@@ -214,7 +214,7 @@ PDF_SERVICES_CLIENT_ID=<YOUR CLIENT ID>
 PDF_SERVICES_CLIENT_SECRET=<YOUR CLIENT SECRET>
 ```
 
-**Example pdfservices-api-credentials.json File**
+**Example pdfservices-api-credentials.json File:**
 
 ```json
 {
