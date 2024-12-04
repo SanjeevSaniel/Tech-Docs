@@ -1,6 +1,6 @@
 # TechDocs
 
-Repository for project documentation.
+This repository contains documentation for our projects.
 
 ## Documentation
 

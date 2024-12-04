@@ -1,0 +1,14 @@
+title: TechDocs
+description: Project documentation
+theme: jekyll-theme-minimal
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# Include custom CSS
+sass:
+  sass_dir: assets/css
