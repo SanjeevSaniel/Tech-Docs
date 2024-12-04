@@ -2,16 +2,57 @@
 
 ## Table of Contents
 
-- [1. Generate Token](#1-generate-token)
-- [2. Get Upload Presigned URI](#2-get-upload-presigned-uri)
-- [3. Upload File](#3-upload-file)
-- [4. Document Generation (DOCX or PDF)](#4-document-generation-docx-or-pdf)
-- [5. Poll the Document Generation Periodically check the status of your document generation job using Adobe's API until it's completed](#5-poll-the-document-generation-periodically-check-the-status-of-your-document-generation-job-using-adobes-api-until-its-completed)
-- [6. Get the Output File](#6-get-the-output-file)
+- [Template Document Generation using Adobe Document Generation API](#template-document-generation-using-adobe-document-generation-api)
+  - [Table of Contents](#table-of-contents)
+  - [Steps to Generate Token, Upload File, Generate Document (DOCX or PDF), and Retrieve Output](#steps-to-generate-token-upload-file-generate-document-docx-or-pdf-and-retrieve-output)
+    - [1. Create a Document Template](#1-create-a-document-template)
+    - [2. Prepare Your JSON Data](#2-prepare-your-json-data)
+    - [3. Get API Key from Adobe Developer Console](#3-get-api-key-from-adobe-developer-console)
+    - [4. Generate Token](#4-generate-token)
+    - [5. Get Upload Presigned URI](#5-get-upload-presigned-uri)
+    - [6. Upload File](#6-upload-file)
+    - [7. Document Generation (DOCX or PDF)](#7-document-generation-docx-or-pdf)
+    - [8. Poll the Document Generation Periodically check the status of your document generation job using Adobe's API until it's completed](#8-poll-the-document-generation-periodically-check-the-status-of-your-document-generation-job-using-adobes-api-until-its-completed)
+    - [9. Get the Output File](#9-get-the-output-file)
 
 ## Steps to Generate Token, Upload File, Generate Document (DOCX or PDF), and Retrieve Output
 
-### 1. Generate Token
+### 1. Create a Document Template
+
+Use Microsoft Word to create a document template. Add template tags to indicate where dynamic content will be inserted. For example:
+
+```plaintext
+Dear {{customer_name}},
+
+Thank you for your purchase of {{product_name}}. Your order number is {{order_number}}.
+
+Best regards,
+{{company_name}}
+```
+
+### 2. Prepare Your JSON Data
+
+Create a JSON file with the data that will replace the template tags. Ensure the JSON structure matches the template tags. For example:
+
+```json
+{
+  "customer_name": "John Doe",
+  "product_name": "Smartphone",
+  "order_number": "123456",
+  "company_name": "TechCorp"
+}
+```
+
+### 3. Get API Key from Adobe Developer Console
+
+To interact with the Adobe Document Generation API, you need to obtain an API key from the Adobe Developer Console. Follow these steps:
+
+1. **Sign in to Adobe Developer Console**: Go to the [Adobe Developer Console](https://developer.adobe.com/console) and sign in with your Adobe ID.
+2. **Create a New Project**: Click on "Create New Project" and give your project a name.
+3. **Add an API**: Select "Add API" and choose "Document Generation API" from the list.
+4. **Generate API Key**: Follow the instructions to generate an API key. Note down the `client_id` and `client_secret` as you will need these for authentication.
+
+### 4. Generate Token
 
 Use Adobe's Identity Management Service (IMS) to generate an access token.
 
@@ -38,7 +79,7 @@ Use Adobe's Identity Management Service (IMS) to generate an access token.
   }
   ```
 
-### 2. Get Upload Presigned URI
+### 5. Get Upload Presigned URI
 
 Get a pre-signed URL for uploading your file to Adobe's cloud storage.
 
@@ -77,7 +118,7 @@ Get a pre-signed URL for uploading your file to Adobe's cloud storage.
   }
   ```
 
-### 3. Upload File
+### 6. Upload File
 
 Use the pre-signed URL to upload your file to Adobe's cloud storage.
 
@@ -109,7 +150,7 @@ Content-Type: application/octet-stream
   }
   ```
 
-### 4. Document Generation (DOCX or PDF)
+### 7. Document Generation (DOCX or PDF)
 
 Submit a document generation job to Adobe's API, specifying the desired format (DOCX or PDF) and providing the JSON data for merge.
 
@@ -144,7 +185,7 @@ Submit a document generation job to Adobe's API, specifying the desired format (
 - **Headers:**
   - `x-request-id`: `<JOB_ID>`
 
-### 5. Poll the Document Generation Periodically check the status of your document generation job using Adobe's API until it's completed
+### 8. Poll the Document Generation Periodically check the status of your document generation job using Adobe's API until it's completed
 
 **Endpoint:** `https://pdf-services-ue1.adobe.io/operation/documentgeneration/{{jobID}}/status`
 
@@ -173,7 +214,7 @@ Submit a document generation job to Adobe's API, specifying the desired format (
   }
   ```
 
-### 6. Get the Output File
+### 9. Get the Output File
 
 Once the document generation is complete, download the output file from Adobe's cloud storage.
 
