@@ -6,7 +6,7 @@ This repository contains documentation for our projects.
 
 - [Adobe Document Generation API Guide](docs/adobe-document-generation-api/index.md)
 - [Adobe SDK Document Creation Guide](docs/adobe-sdk-documentation/index.md)
-- [Pega DX API Guide](docs/pega-dx-api-guide/create-case.md)
+- [Pega DX API Guide](docs/pega-dx-api/create-case.md)
 
 ## Repository Link
 
