@@ -147,8 +147,6 @@ Use the pre-signed URL to upload your file to Adobe's cloud storage.
 **Request:**
 
 - **Method:** `PUT`
-- **Headers:**
-  - `Content-Type`: `application/octet-stream`
 - **Body:**
   - The body should contain the raw binary content of the file you are uploading.
 
