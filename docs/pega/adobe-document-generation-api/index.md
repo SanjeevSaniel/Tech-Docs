@@ -157,7 +157,6 @@ Use the pre-signed URL to upload your file to Adobe's cloud storage.
 ```http
 PUT <UPLOAD_URI> HTTP/1.1
 Host: <UPLOAD_HOST>
-Content-Type: application/octet-stream
 
 <FILE_CONTENT>
 ```
